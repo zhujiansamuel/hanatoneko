@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% for categ in categories %}
+    <a href="{% url 'products:category' categ.slug categ.id %}">{{ categ.name }}</a>
+    <br>
+{% endfor %}
+
+
+{% for product in products_paginated %}
+    <a href="{% url 'products:productdetail' product.id %}">{{ product.name }}</a>
+    <br>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ products_paginated.number }} of {{ products_paginated.paginator.num_pages }}.
+        </span>
+        {% if has_next %}
+            <a href="?page={{ next_page_number }}">next</a>
+            <a href="?page={{ products_paginated.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

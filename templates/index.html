@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for categ in categories_list %}
+        <a href="{% url 'products:category' categ.slug categ.id %}">{{ categ.name }}</a>
+    {% endfor %}
+
+    <h2>Products</h2>
+    <ul>
+        {% for product in products_list %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
